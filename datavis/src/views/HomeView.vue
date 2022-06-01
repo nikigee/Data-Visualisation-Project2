@@ -17,8 +17,8 @@
         </p>
       </div>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Chart 1</button>
-        <button type="button" class="btn btn-primary btn-lg px-4">Chart 2</button>
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Production</button>
+        <button type="button" class="btn btn-primary btn-lg px-4">Consumption</button>
       </div>
     </div>
     <Chart1/>
