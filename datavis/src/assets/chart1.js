@@ -6,7 +6,7 @@ const chart = (d3, chartLink) => {
   let endDate = 2021;
 
   let margin = { top: 50, right: 50, bottom: 0, left: 50 };
-  let width = 960 - margin.left - margin.right;
+  const width = 960 - margin.left - margin.right;
   let height = 500 - margin.top - margin.bottom;
 
   let tooltipTextColour1 = "white";
@@ -32,7 +32,7 @@ const chart = (d3, chartLink) => {
     xPosition: "",
     yPosition: "",
     handle: "",
-    label: ""
+    label: "",
   };
   let timer = 0;
   let x = 0;
@@ -46,11 +46,17 @@ const chart = (d3, chartLink) => {
 
   ////////// slider //////////
   function start() {
+    if(document.querySelector("#chart1").querySelector("svg"))
+    {
+      document.querySelector("#chart1").querySelector("svg").remove();
+    }
     d3Dom.svg = d3
       .select("#chart1")
       .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom);
+      //.attr("width", width + margin.left + margin.right)
+      //.attr("height", height + margin.top + margin.bottom);
+      .attr("preserveAspectRatio", "xMinYMin meet")
+      .attr("viewBox", "0 0 960 500");
 
     playButton = d3.select("#playButton");
 
@@ -68,7 +74,7 @@ const chart = (d3, chartLink) => {
 
     d3Dom.yScale = d3
       .scaleLinear()
-      .domain([0, 329.9])
+      .domain([0, 180])
       .range([height, height / 2]);
 
     var slider = d3Dom.svg

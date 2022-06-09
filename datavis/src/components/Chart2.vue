@@ -1,7 +1,7 @@
-<!-- Components to serpate our two charts, this one is for renewable vs total energy production -->
+<!-- Components to serpate our two charts, this one is for consumption -->
 <template>
-  <h2 class="display-7 fw-bold" id="production">
-    How much of our total energy generation is renewable?
+  <h2 class="display-7 fw-bold" id="consumption">
+    What kinds of energy do we consume?
   </h2>
   <div class="col-lg-5 mx-auto">
     <p class="fs-6 mb-4">
@@ -11,13 +11,13 @@
     </p>
   </div>
   <div class="col-lg-8 mx-auto">
-    <div id="chart1"></div>
+    <div id="chart2"></div>
     <div class="buttons d-grid gap-2 d-sm-flex justify-content-sm-center">
-      <button
-        id="playButton"
-        class="btn btn-outline-secondary btn-lg px-3 gap-3"
-      >
-        Start
+      <button id="default" class="btn btn-outline-secondary btn-lg px-3 gap-3">
+        Default
+      </button>
+      <button id="button" class="btn btn-outline-secondary btn-lg px-3 gap-3">
+        Show More
       </button>
     </div>
   </div>
@@ -25,12 +25,12 @@
 
 <script>
 import * as d3 from "d3";
-import chart from "@/assets/chart1.js";
+import chart from "@/assets/chart2.js";
 
 export default {
-  name: "Chart1",
+  name: "Chart2",
   mounted() {
-    chart(d3, "./chart1.csv");
+    
   },
 };
 </script>

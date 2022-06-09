@@ -17,15 +17,24 @@
         </p>
       </div>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">
-          Production
-        </button>
-        <button type="button" class="btn btn-primary btn-lg px-4">
-          Consumption
-        </button>
+        <a href="#production">
+          <button type="button" class="btn btn-primary btn-lg px-4 gap-3">
+            Production
+          </button>
+        </a>
+        <a href="#consumption">
+          <button type="button" class="btn btn-primary btn-lg px-4">
+            Consumption
+          </button>
+        </a>
       </div>
     </div>
-    <Chart1 />
+    <div class="block">
+      <Chart1 />
+    </div>
+    <div class="block">
+      <Chart2 />
+    </div>
   </div>
 </template>
 
@@ -33,22 +42,34 @@
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
 import Chart1 from "@/components/Chart1.vue";
+import Chart2 from "@/components/Chart2.vue";
 
 export default {
   name: "HomeView",
   components: {
     HelloWorld,
     Chart1,
+    Chart2,
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .btn {
   font-size: 1em;
 }
 img {
   height: 250px;
+}
+
+.block{
+  padding-bottom: 5em;
+}
+
+a {
+  button {
+    width: 100%;
+  }
 }
 
 .header {
