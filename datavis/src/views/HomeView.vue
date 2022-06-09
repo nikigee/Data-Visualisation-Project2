@@ -17,11 +17,15 @@
         </p>
       </div>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Production</button>
-        <button type="button" class="btn btn-primary btn-lg px-4">Consumption</button>
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">
+          Production
+        </button>
+        <button type="button" class="btn btn-primary btn-lg px-4">
+          Consumption
+        </button>
       </div>
     </div>
-    <Chart1/>
+    <Chart1 />
   </div>
 </template>
 
@@ -34,12 +38,15 @@ export default {
   name: "HomeView",
   components: {
     HelloWorld,
-    Chart1
-},
+    Chart1,
+  },
 };
 </script>
 
 <style scoped>
+.btn {
+  font-size: 1em;
+}
 img {
   height: 250px;
 }
