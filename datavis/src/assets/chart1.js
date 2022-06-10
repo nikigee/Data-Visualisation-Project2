@@ -223,9 +223,9 @@ const chart = (d3, chartLink) => {
       })
       .style("fill", function (d, i) {
         if (i == 0) {
-          return "green";
+          return "#42b983";
         } else if (i == 1) {
-          return "grey";
+          return "#bfbfbf";
         }
       });
 

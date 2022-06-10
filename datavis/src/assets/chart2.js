@@ -1,40 +1,60 @@
 //init method below contains the code to read the data from the csv file
 
-const chart = () => {
-  //'Global' variables
-  w2 = 1000;
-  h2 = 600;
-  padding2 = 50;
-  svgHeight2 = h2 + padding2;
-  svgWidth2 = w2 + padding2;
+const chart = (d3, chartLink) => {
+  // variables
+  const w2 = 1000;
+  const h2 = 600;
+  const padding2 = 50;
+  const svgHeight2 = h2 + padding2;
+  const svgWidth2 = w2 + padding2;
 
-  defaultColour = "RGB(101, 143, 111)";
-  renewablesColour = "RGB(73, 181, 67)";
-  oilColour = "blue";
-  gasColour = "RGB(67, 147, 181)";
-  coalColour = "red";
-  circleColour = "black";
-  circleBeginRadius = 4;
-  circleEndRadius = 6;
-  areaLineColour = "black";
-  rectLineColour = "black";
+  const defaultColour = "#42b983";
+  const renewablesColour = "#42b983";
+  const oilColour = "blue";
+  const gasColour = "RGB(67, 147, 181)";
+  const coalColour = "red";
+  const circleColour = "black";
+  const circleBeginRadius = 4;
+  const circleEndRadius = 6;
+  const areaLineColour = "black";
+  const rectLineColour = "black";
 
-  tooltipTextColour = "white";
-  tooltipBGColour = "black";
+  const tooltipTextColour = "white";
+  const tooltipBGColour = "black";
 
-  //END GLOBALS ==============================================
+  let xScale = "";
+  let yScale = "";
+  let renewables = "";
+  let svg = "";
+  let line = "";
+  let xAxis = "";
+  let yAxis = "";
+  let maxRen = "";
+  let maxCoal = "";
+  let maxOil = "";
+  let maxGas = "";
+  let coal = "";
+  let oil = "";
+  let gas = "";
+  let renewablesLine = "";
+  let coalLine = "";
+  let oilLine = "";
+  let gasLine = "";
+
+  let selected = "";
 
   function drawSVG2() {
     console.log("drawSVG");
 
-    d3.select("#chart")
+    d3.select("#chart2")
       .append("svg")
-      .attr("width", svgWidth2)
-      .attr("height", svgHeight2);
+      .attr("id", "chart2svg")
+      .attr("preserveAspectRatio", "xMinYMin meet")
+      .attr("viewBox", "0 0 960 500");
 
     d3.select("body")
       .append("div")
-      .attr("class", "tooltip")
+      .attr("class", "tooltip2")
       .style("position", "absolute")
       .style("z-index", "10")
       .style("visibility", "hidden")
@@ -62,9 +82,9 @@ const chart = () => {
     console.log("initialiseAll");
 
     d3.select("#button").on("click", function (event) {
-      d3.select("svg").selectAll("*").remove();
+      d3.select("#chart2svg").selectAll("*").remove();
 
-      d3.csv("chart2.csv", function (d) {
+      d3.csv(chartLink, function (d) {
         return {
           Date: new Date(d.date),
           Renewables: +d.Renewables,
@@ -80,7 +100,7 @@ const chart = () => {
 
   function resetDefault2() {
     d3.select("#default").on("click", function (event) {
-      d3.select("svg").selectAll("*").remove();
+      d3.select("#chart2svg").selectAll("*").remove();
 
       d3.csv("chart2.csv", function (d) {
         return {
@@ -95,18 +115,20 @@ const chart = () => {
 
   // Adding the collected data to the svg
   function createDefault2(data) {
-    console.log("createDefault");
+    //console.log("createDefault");
+    const svgW = 950;
+    const svgH = 460;
 
     //Scaling X and Y Axes
     xScale = d3
       .scaleTime()
       .domain([d3.min(data, (d) => d.Date), d3.max(data, (d) => d.Date)])
-      .range([padding2, w2]);
+      .range([padding2, svgW]);
 
     yScale = d3
       .scaleLinear()
       .domain([0, d3.max(data, (d) => d.Renewables)])
-      .range([h2, padding2]);
+      .range([svgH, padding2]);
     //END SCALING ==============================================
 
     //Renewables area chart
@@ -118,7 +140,7 @@ const chart = () => {
       })
       .y1((d) => yScale(d.Renewables));
 
-    svg = d3.select("svg");
+    svg = d3.select("#chart2svg");
 
     //Appending Renewables to the SVG
     svg
@@ -152,10 +174,10 @@ const chart = () => {
     yAxis = d3.axisLeft().ticks(10).scale(yScale);
     svg
       .append("g")
-      .attr("transform", "translate(" + 0 + ", " + h2 + ")")
+      .attr("transform", "translate(" + 0 + ", " + svgH + ")")
       .call(xAxis);
 
-    d3.select("svg")
+    d3.select("#chart2svg")
       .append("g")
       .attr("transform", "translate(" + padding2 + ", " + 0 + ")")
       .call(yAxis);
@@ -179,7 +201,8 @@ const chart = () => {
       .style("opacity", "0");
 
     //Adding interactivity
-    d3.selectAll("circle")
+    d3.select("#chart2svg")
+      .selectAll("circle")
       .on("mouseover", function (event, d) {
         d3.select(this)
           .transition()
@@ -187,15 +210,15 @@ const chart = () => {
           .style("opacity", "1")
           .attr("r", 6);
 
-        d3.select(".tooltip")
+        d3.select(".tooltip2")
           .text(
             `Year: ${d.Date.getFullYear()}, Renewables consumed: ${
               d.Renewables
             }`
           )
           .style("visibility", "visible")
-          .style("top", this.cy.baseVal.value + 100 + "px")
-          .style("left", this.cx.baseVal.value + "px");
+          .style("top", event.pageY - 30 + "px")
+          .style("left", event.pageX + "px");
       })
       .on("mouseout", function () {
         d3.select(this)
@@ -204,14 +227,14 @@ const chart = () => {
           .style("opacity", "0")
           .attr("r", 4);
 
-        d3.select(".tooltip").style("visibility", "hidden");
+        d3.select(".tooltip2").style("visibility", "hidden");
       });
     //END CIRCLES ===================================================
   }
   //END createDefault function ==============================================
 
   function createAll2(data) {
-    console.log("createAll");
+    //console.log("createAll");
     //Adding COAL, OIL, GAS via button
     //Scaling X and Y Axes
 
@@ -220,15 +243,18 @@ const chart = () => {
     maxOil = d3.max(data, (d) => d.Oil);
     maxGas = d3.max(data, (d) => d.Gas);
 
+    const svgW = 950;
+    const svgH = 460;
+
     xScale = d3
       .scaleTime()
       .domain([d3.min(data, (d) => d.Date), d3.max(data, (d) => d.Date)])
-      .range([padding2, w2]);
+      .range([padding2, svgW]);
 
     yScale = d3
       .scaleLinear()
       .domain([0, d3.max([maxRen, maxCoal, maxOil, maxGas])])
-      .range([h2, padding2]);
+      .range([svgH, padding2]);
 
     //Renewables area chart
     renewables = d3
@@ -287,7 +313,7 @@ const chart = () => {
       .x((d) => xScale(d.Date))
       .y((d) => yScale(d.Gas));
 
-    svg = d3.select("svg");
+    svg = d3.select("#chart2svg");
 
     //Appending Oil to the SVG
     svg
@@ -433,7 +459,8 @@ const chart = () => {
     //END appending all plots ==================================
 
     //Adding interactivity
-    d3.selectAll("circle")
+    d3.select("#chart2svg")
+      .selectAll("circle")
       .on("mouseover", function (event, d) {
         d3.select(this)
           .transition()
@@ -450,7 +477,7 @@ const chart = () => {
           .style("opacity", 0.8)
           .style("stroke-width", "0.5");
 
-        d3.select(".tooltip")
+        d3.select(".tooltip2")
           .text(
             `Year: ${d.Date.getFullYear()} ${
               this.className.baseVal
@@ -462,12 +489,12 @@ const chart = () => {
             })(data.d)}`
           )
           .style("visibility", "visible")
-          .style("top", this.cy.baseVal.value + 100 + "px")
-          .style("left", this.cx.baseVal.value + "px");
+          .style("top", event.pageY - 30 + "px")
+          .style("left", event.pageX + "px");
 
         d3.selectAll(`.${this.className.baseVal}`).style("opacity", "0.6");
 
-        d3.selectAll("circle").style("opacity", "0");
+        d3.select("#chart2svg").selectAll("circle").style("opacity", "0");
       })
       .on("mouseout", function () {
         d3.select(this)
@@ -476,11 +503,12 @@ const chart = () => {
           .style("opacity", "0")
           .attr("r", circleBeginRadius);
 
-        d3.select(".tooltip").style("visibility", "hidden");
+        d3.select(".tooltip2").style("visibility", "hidden");
 
-        d3.selectAll("path").style("opacity", "0.5");
-        d3.selectAll(".line").style("opacity", "1");
-        d3.selectAll("rect").remove();
+        let graph2 = d3.select("#chart2svg");
+        graph2.selectAll("path").style("opacity", "0.5");
+        graph2.selectAll(".line").style("opacity", "1");
+        graph2.selectAll("rect").remove();
       });
     //Initilising and drawing X and Y axes
     xAxis = d3.axisBottom().scale(xScale);
@@ -488,10 +516,10 @@ const chart = () => {
     yAxis = d3.axisLeft().ticks(10).scale(yScale);
     svg
       .append("g")
-      .attr("transform", "translate(" + 0 + ", " + h2 + ")")
+      .attr("transform", "translate(" + 0 + ", " + svgH + ")")
       .call(xAxis);
 
-    d3.select("svg")
+    d3.select("#chart2svg")
       .append("g")
       .attr("transform", "translate(" + padding2 + ", " + 0 + ")")
       .call(yAxis);
@@ -499,6 +527,8 @@ const chart = () => {
   }
 
   function init() {
+    if (document.querySelector("#chart2svg"))
+      document.querySelector("#chart2svg").remove();
     drawSVG2();
     initialiseDefault2();
     initialiseAll2();

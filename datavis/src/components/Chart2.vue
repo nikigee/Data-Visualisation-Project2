@@ -1,6 +1,6 @@
 <!-- Components to serpate our two charts, this one is for consumption -->
 <template>
-  <h2 class="display-7 fw-bold" id="consumption">
+  <h2 class="display-7 fw-bold">
     What kinds of energy do we consume?
   </h2>
   <div class="col-lg-5 mx-auto">
@@ -30,10 +30,22 @@ import chart from "@/assets/chart2.js";
 export default {
   name: "Chart2",
   mounted() {
-    
+    chart(d3, "chart2.csv");
   },
 };
 </script>
+
+<style lang="scss">
+#chart2svg {
+  circle {
+    padding: 30px;
+  }
+}
+.tooltip2{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+</style>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">

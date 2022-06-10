@@ -1,6 +1,6 @@
 <!-- Components to serpate our two charts, this one is for renewable vs total energy production -->
 <template>
-  <h2 class="display-7 fw-bold" id="production">
+  <h2 class="display-7 fw-bold">
     How much of our total energy generation is renewable?
   </h2>
   <div class="col-lg-5 mx-auto">
@@ -10,7 +10,7 @@
       long way to go if we wish to rely on it as our main source of electricity.
     </p>
   </div>
-  <div class="col-lg-8 mx-auto">
+  <div class="col-lg-8 mx-auto" id="chart1-wrap">
     <div id="chart1"></div>
     <div class="buttons d-grid gap-2 d-sm-flex justify-content-sm-center">
       <button
@@ -48,7 +48,11 @@ p {
 }
 </style>
 
-<style>
+<style lang="scss">
+#chart1, #chart1-wrap {
+  overflow: visible;
+}
+
 .ticks {
   font-size: 10px;
 }

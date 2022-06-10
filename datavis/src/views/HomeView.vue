@@ -29,10 +29,10 @@
         </a>
       </div>
     </div>
-    <div class="block">
+    <div class="block" id="production">
       <Chart1 />
     </div>
-    <div class="block">
+    <div class="block" id="consumption">
       <Chart2 />
     </div>
   </div>
@@ -63,7 +63,8 @@ img {
 }
 
 .block{
-  padding-bottom: 5em;
+  padding-top: 3em;
+  padding-bottom: 3em;
 }
 
 a {
