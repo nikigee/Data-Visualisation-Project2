@@ -13,9 +13,9 @@ const chart = (d3, chartLink) => {
   const oilColour = "blue";
   const gasColour = "RGB(67, 147, 181)";
   const coalColour = "red";
-  const circleColour = "black";
-  const circleBeginRadius = 4;
-  const circleEndRadius = 6;
+  const circleColour = "#1a1a1a";
+  const circleBeginRadius = 10;
+  const circleEndRadius = 10;
   const areaLineColour = "black";
   const rectLineColour = "black";
 
@@ -357,7 +357,7 @@ const chart = (d3, chartLink) => {
       .style("fill", renewablesColour)
       .style("stroke", renewablesColour)
       .style("stroke-width", "0.5")
-      .style("opacity", "0.5");
+      .style("opacity", "1.0");
 
     const enter = svg.selectAll("circle").data(data).enter();
 
@@ -489,10 +489,11 @@ const chart = (d3, chartLink) => {
             })(data.d)}`
           )
           .style("visibility", "visible")
-          .style("top", event.pageY - 30 + "px")
+          .style("top", event.pageY - 40 + "px")
           .style("left", event.pageX + "px");
 
-        d3.selectAll(`.${this.className.baseVal}`).style("opacity", "0.6");
+        if(this.className.baseVal != "Renewables")
+          d3.selectAll(`.${this.className.baseVal}`).style("opacity", "0.6");
 
         d3.select("#chart2svg").selectAll("circle").style("opacity", "0");
       })
@@ -507,6 +508,7 @@ const chart = (d3, chartLink) => {
 
         let graph2 = d3.select("#chart2svg");
         graph2.selectAll("path").style("opacity", "0.5");
+        graph2.select(".Renewables").style("opacity", "1");
         graph2.selectAll(".line").style("opacity", "1");
         graph2.selectAll("rect").remove();
       });

@@ -1,13 +1,13 @@
 <!-- Components to serpate our two charts, this one is for consumption -->
 <template>
-  <h2 class="display-7 fw-bold">
-    What kinds of energy do we consume?
-  </h2>
+  <h2 class="display-7 fw-bold">What kinds of energy do we consume?</h2>
   <div class="col-lg-5 mx-auto">
     <p class="fs-6 mb-4">
-      Renewable generation in this country has remained largely static since the
-      80's. Since the 2010's, production has risen dramatically but still has a
-      long way to go if we wish to rely on it as our main source of electricity.
+      Our consumption of Renewable energy has increased since the 80s but
+      compared to other non-renewable sources, it has
+      remained largely static. Especially Oil and Gas, which has risen
+      dramatically. An exception is Coal; which since 2008, our consumption has
+      dropped by 645 Petajoules.
     </p>
   </div>
   <div class="col-lg-8 mx-auto">
@@ -41,7 +41,7 @@ export default {
     padding: 30px;
   }
 }
-.tooltip2{
+.tooltip2 {
   padding-left: 5px;
   padding-right: 5px;
 }

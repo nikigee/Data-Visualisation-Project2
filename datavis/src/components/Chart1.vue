@@ -6,8 +6,9 @@
   <div class="col-lg-5 mx-auto">
     <p class="fs-6 mb-4">
       Renewable generation in this country has remained largely static since the
-      80's. Since the 2010's, production has risen dramatically but still has a
-      long way to go if we wish to rely on it as our main source of electricity.
+      80's. Since the 2010's, production in terawatt hours has risen
+      dramatically but still has a long way to go if we wish to rely on it as
+      our main source of electricity.
     </p>
   </div>
   <div class="col-lg-8 mx-auto" id="chart1-wrap">
@@ -49,7 +50,8 @@ p {
 </style>
 
 <style lang="scss">
-#chart1, #chart1-wrap {
+#chart1,
+#chart1-wrap {
   overflow: visible;
 }
 

@@ -1,15 +1,15 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <div class="space">
+
+  </div>
   <router-view />
   <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
       <span class="text-muted">COS30045: Data Visualisation</span>
     </div>
     <div class="container">
-      <span class="text-muted">Nikita Golev 102098683</span><span class="text-muted">Jack Baracco 103370243</span>
+      <span class="text-muted">Nikita Golev 102098683</span
+      ><span class="text-muted">Jack Baracco 103370243</span>
     </div>
   </footer>
 </template>
@@ -17,18 +17,21 @@
 <script></script>
 
 <style lang="scss" scoped>
-  footer{
-    .container{
-      display: flex;
-      justify-content: center;
-    }
-    span{
-      font-size: 14px;
-      display: block;
-      margin-left: 0.3em;
-      margin-right: 0.3em;
-    }
+.space{
+  padding: 2em;
+}
+footer {
+  .container {
+    display: flex;
+    justify-content: center;
   }
+  span {
+    font-size: 14px;
+    display: block;
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+  }
+}
 </style>
 
 <style lang="scss">
