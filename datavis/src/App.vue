@@ -2,7 +2,7 @@
   <div class="space">
 
   </div>
-  <router-view />
+  <HomeView />
   <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
       <span class="text-muted">COS30045: Data Visualisation</span>
@@ -14,7 +14,15 @@
   </footer>
 </template>
 
-<script></script>
+<script>
+import HomeView from "@/views/HomeView.vue";
+
+export default {
+  components: {
+    HomeView
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .space{
